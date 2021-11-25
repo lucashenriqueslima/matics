@@ -1,0 +1,16 @@
+  
+{
+    "name":"htdocs/matics2",
+    "autoload":{
+        "psr-4":{
+            "Source\\":"source/"
+            },
+            "files":[
+                "source/Config.php",
+                "source/Helpers.php"
+            ]
+        },
+        "require": {
+            "coffeecode/router": "1.0.*"
+        }
+    }
