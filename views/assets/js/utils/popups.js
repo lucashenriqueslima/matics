@@ -18,26 +18,14 @@ function alert(icon, message)
       })    
 }
 
-function modal(title, html, button_confirm)
-{
-  Swal.fire({
-    title: `<strong>${title}</strong>`,
-    showClass: {  
-      popup: 'animate__animated animate__fadeInUp animate__fast'
-    },
-    hideClass: {
-      popup: 'animate__animated animate__fadeOutDown animate__fast'
-    }, 
-    html: html,
-    showCloseButton: true,
-    showCancelButton: true,
-    focusConfirm: false,
-    confirmButtonColor: '#388e3c',
-    confirmButtonText: button_confirm,
-    confirmButtonAriaLabel: 'Thumbs up, great!',
-    cancelButtonText:
-      '<i class="fa fa-times"></i> Cancelar',
-    cancelButtonAriaLabel: 'Thumbs down'
-    
-  })
+function ajax_load(action) {
+  ajax_load_div = $(".ajax_load");
+
+  if (action === "open") {
+      ajax_load_div.fadeIn(400).css("display", "flex");
+  }
+
+  if (action === "close") {
+      ajax_load_div.fadeOut(600);
+  }
 }

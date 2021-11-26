@@ -38,11 +38,14 @@ $router->post("/reset", "Auth:msg");
 /**
  * Api
  */
+/*painel de controle*/
 $router->group("api");
 $router->get("/v1/getdategraph", 'Api:getDateGraph');
 $router->get("/v1/getdatagraph/{min_date}/{max_date}", "Api:getDataGraph");
+
+/*companies*/
 $router->get("/v1/getcompanies", "Api:getCompanies");
-$router->get("/v1/getcompanies/{keyword}", "Api:getCompanies");
+$router->delete("/v1/deletecompany/{id_company}", "Api:deleteCompany");
 
 $router->group("ooops");
 $router->get("/{errcode}", function ($data){
@@ -51,9 +54,7 @@ $router->get("/{errcode}", function ($data){
 
 $router->dispatch();
 
-if($router->error()){
-    $router->redirect("/ooops/{$router->error()}");
-}
+
 
 
 

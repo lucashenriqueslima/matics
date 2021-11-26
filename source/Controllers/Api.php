@@ -45,4 +45,9 @@ use Source\Models\Finance;
             return print_r(json_encode((new Companies)->getCompanies($_SESSION['id_user'])));
         }
 
+        public function deleteCompany($data)
+        {
+            return print_r(json_encode((new Companies)->deleteCompany($_SESSION['id_user'], $data['id_company'])));
+        }
+
     }

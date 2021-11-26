@@ -11,5 +11,13 @@ class Companies extends Model
 
         return $stmt->fetchAll();
     }
+
+    public function deleteCompany($id_user, $id_company)
+    {
+        $stmt = $this->pdo->prepare("DELETE FROM companies WHERE id_user = ? AND id_company = ?");
+        $stmt->execute(array($id_user, $id_company));
+        
+        return($stmt);
+    }
     
 }

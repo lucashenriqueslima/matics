@@ -36,6 +36,12 @@
 </head>
 
 <body id="page-top">
+<div id="loader" class="ajax_load">
+    <div class="ajax_load_box">
+        <div class="ajax_load_box_circle"></div>
+        <div class="ajax_load_box_title">Aguarde, carrengando...</div>
+    </div>
+</div>
     
     <!-- Page Wrapper -->
     <div id="wrapper">
@@ -63,7 +69,7 @@
             
             <hr class="sidebar-divider my-0">
 
-            <li class="nav-item">
+            <li class="nav-item active">
                 <a class="nav-link" href="index.html">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Painel de Controle</span></a>

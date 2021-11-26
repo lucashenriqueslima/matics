@@ -9,9 +9,9 @@
     </div>
     <div class="card-body">
         <div class="table-responsive">
-
+            <div id="reset">
             <div id="grid-table"></div>
-            
+            </div>
             <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -30,7 +30,12 @@
                     </span>
                     <span class="text">Cancelar</span>
                 </button>
-                    <a class="btn btn-primary" href="<?= route("/me/logoff")?>">Sair</a>
+                <button href="#" class="btn btn-danger btn-icon-split" id="deleteModalButton" type="button" data-dismiss="modal">
+                    <span class="icon text-white-50">
+                        <i class="far fa-trash-alt"></i>
+                    </span>
+                    <span class="text">Deletar</span>
+                </button>
                 </div>
             </div>
         </div>

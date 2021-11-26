@@ -1,5 +1,7 @@
+tableGrid()
 
-    new gridjs.Grid({
+function tableGrid() {
+    const grid = new gridjs.Grid({
      
       language: {
         search: {
@@ -62,10 +64,48 @@
   } 
 }).render(document.getElementById("grid-table"));
 
-function deleteModal(element) {
-    let row = (element.parentNode.parentNode.parentNode)
-    
-    document.getElementById("deleteModalTitle").innerHTML = `Deseja Deletar <b>${row.firstChild.innerText}</b>?`
-    document.getElementById("deleteModalContent").innerHTML = `Clique em "Deletar" para excluir <b>${row.firstChild.innerText} - ${row.children[1].innerText}</b>?`
-    
 }
+
+function getRow(element) {
+  row = (element.parentNode.parentNode.parentNode)
+}
+
+function infoModal(element) {
+  getRow(element)
+  
+  
+
+}
+
+function editModal(element) {
+
+}
+
+function deleteModal(element) {
+  getRow(element)
+  
+  document.getElementById("deleteModalTitle").innerHTML = `Deseja Deletar <b>${row.firstChild.innerText}</b>?`
+  document.getElementById("deleteModalContent").innerHTML = `Clique em "Deletar" para excluir a empresa <b>${row.firstChild.innerText} - ${row.children[1].innerText}</b>`
+
+  document.getElementById("deleteModalButton").dataset.value = element.id
+  
+}
+
+document.getElementById("deleteModalButton").addEventListener("click", async (e) => {
+
+  btn = document.getElementById("deleteModalButton")
+  
+  let response = await fetch(`http://localhost/matics2/api/v1/deletecompany/${await btn.dataset.value}`, {
+                        method: 'DELETE',
+                        body: null
+  })
+
+    if(await response.json){
+      document.getElementById("grid-table").parentNode.removeChild(document.getElementById("grid-table"))
+      document.getElementById("reset").innerHTML = '<div id="grid-table"></div>'
+      tableGrid()
+      setTimeout(function() {
+      alert('success', `Empresa ${row.firstChild.innerText} excluida com sucesso.`)
+      }, 440) 
+    }
+})
