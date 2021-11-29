@@ -43,13 +43,19 @@ function tableGrid() {
     },
   columns: [
                 {
-                  name: 'Razão Social'
+                    name: 'Razão Social'
                 },
                 {
-                  name: 'Nome Fantasia'
+                    name: 'Nome Fantasia'
                 },
                 {
-                  name: 'CNPJ'
+                    name: 'CNPJ'
+                },
+                {
+                    name: "Valor"
+                },
+                {
+                    name: "Data"
                 },
                 {
                   name: "Ações",
@@ -58,9 +64,9 @@ function tableGrid() {
   
             ],
   server: {
-    url: `${url}/getcompanies`,
-   then: data => data.map(companies => [companies.razao_social, companies.nome_fantasia, companies.cnpj, gridjs.html(`
-  <button class="btn btn-sm btn-circle btn-outline-dark d-inline" onclick="infoModal()"><i class="fas fa-info"></i></button><button class="btn btn-sm btn-circle btn-outline-dark mx-3 d-inline" onclick="editModal(this)" data-toggle="modal" data-target="#editModal" id="${companies.id_company}"><i class="far fa-edit"></i></button> <button class="btn btn-sm btn-circle btn-outline-dark d-inline" id="${companies.id_company}" onclick="deleteModal(this)" data-toggle="modal" data-target="#deleteModal"><i class="far fa-trash-alt"></i></button>
+    url: `${url}/getcredits`,
+   then: data => data.map(credits => [credits.razao_social, credits.nome_fantasia, credits.cnpj, number_format(credits.value), credits.date, gridjs.html(`
+ <button class="btn btn-sm btn-circle btn-outline-dark mr-1 d-inline" onclick="payedModal(this)" data-toggle="modal" data-target="#payedModal" id="${credits.id_credit_earning}"><i class="fas fa-hand-holding-usd"></i></button> <button class="btn btn-sm btn-circle btn-outline-dark ml-1 d-inline" id="${credits.id_earning_credit}" onclick="deleteModal(this)" data-toggle="modal" data-target="#deleteModal"><i class="far fa-trash-alt"></i></button>
 `)]) 
   } 
 }).render(document.getElementById("grid-table"));
@@ -73,18 +79,15 @@ function getRow(element) {
   row = (element.parentNode.parentNode.parentNode)
 }
 
-function infoModal() {
-  alert("warning", "Em Desenvolvimento.")
-}
 
-function editModal(element) {
+function payedModal(element) {
   getRow(element)
   
-  document.getElementById("editModalTitle").innerHTML = `Editar <b>${row.firstChild.innerText} | ${row.children[1].innerText}</b>`
-  document.getElementById("edit_razao_social").value = row.firstChild.innerText
-  document.getElementById("edit_nome_fantasia").value = row.children[1].innerText
-  document.getElementById("edit_cnpj").value = row.children[2].innerText
-  document.getElementById("edit_id_company").value = element.id
+  document.getElementById("payedModalTitle").innerHTML = `Abater crédito <b>${row.children[1].innerText} | ${number_format(row.children[3].innerText)} | ${row.children[4].innerText}</b>`
+  document.getElementById("payed_razao_social").value = row.firstChild.innerText
+  document.getElementById("payed_nome_fantasia").value = row.children[1].innerText
+  document.getElementById("payed_cnpj").value = row.children[2].innerText
+  document.getElementById("payed_id_company").value = element.id
   
 }
 

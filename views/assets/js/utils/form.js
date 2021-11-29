@@ -30,7 +30,7 @@ $(window).on("load", function(){
                     $(`#${su.modal_close.modal}`).modal('hide')    
                     setTimeout(function() {  
                     alert(su.modal_close.type, su.modal_close.message)
-                    }, 180)
+                    }, 300)
                     return;
                 }
 

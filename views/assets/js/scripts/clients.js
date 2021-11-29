@@ -8,6 +8,10 @@ function tableGrid() {
         search: {
           placeholder: 'Procurar...'
         },
+        sort: {
+          sortAsc: 'Ordenar coluna decrescentemente',
+          sortDesc: 'Ordenar coluna crescentemente',
+        },
         pagination: {
           previous: 'Anterior',
           next: 'Próximo',
@@ -43,13 +47,13 @@ function tableGrid() {
     },
   columns: [
                 {
-                  name: 'Razão Social'
+                  name: 'Nome'
                 },
                 {
-                  name: 'Nome Fantasia'
+                  name: 'Celular'
                 },
                 {
-                  name: 'CNPJ'
+                  name: 'CPF'
                 },
                 {
                   name: "Ações",
@@ -58,9 +62,9 @@ function tableGrid() {
   
             ],
   server: {
-    url: `${url}/getcompanies`,
-   then: data => data.map(companies => [companies.razao_social, companies.nome_fantasia, companies.cnpj, gridjs.html(`
-  <button class="btn btn-sm btn-circle btn-outline-dark d-inline" onclick="infoModal()"><i class="fas fa-info"></i></button><button class="btn btn-sm btn-circle btn-outline-dark mx-3 d-inline" onclick="editModal(this)" data-toggle="modal" data-target="#editModal" id="${companies.id_company}"><i class="far fa-edit"></i></button> <button class="btn btn-sm btn-circle btn-outline-dark d-inline" id="${companies.id_company}" onclick="deleteModal(this)" data-toggle="modal" data-target="#deleteModal"><i class="far fa-trash-alt"></i></button>
+    url: `${url}/getclients`,
+   then: data => data.map(clients => [clients.name, clients.cellphone, clients.cpf, gridjs.html(`
+  <button class="btn btn-sm btn-circle btn-outline-dark d-inline" onclick="infoModal()"><i class="fas fa-info"></i></button><button class="btn btn-sm btn-circle btn-outline-dark mx-3 d-inline" onclick="editModal(this)" data-toggle="modal" data-target="#editModal" id="${clients.id_client}"><i class="far fa-edit"></i></button> <button class="btn btn-sm btn-circle btn-outline-dark d-inline" id="${clients.id_client}" onclick="deleteModal(this)" data-toggle="modal" data-target="#deleteModal"><i class="far fa-trash-alt"></i></button>
 `)]) 
   } 
 }).render(document.getElementById("grid-table"));
@@ -81,10 +85,10 @@ function editModal(element) {
   getRow(element)
   
   document.getElementById("editModalTitle").innerHTML = `Editar <b>${row.firstChild.innerText} | ${row.children[1].innerText}</b>`
-  document.getElementById("edit_razao_social").value = row.firstChild.innerText
-  document.getElementById("edit_nome_fantasia").value = row.children[1].innerText
-  document.getElementById("edit_cnpj").value = row.children[2].innerText
-  document.getElementById("edit_id_company").value = element.id
+  document.getElementById("edit_nome").value = row.firstChild.innerText
+  document.getElementById("edit_celular").value = row.children[1].innerText
+  document.getElementById("edit_cpf").value = row.children[2].innerText
+  document.getElementById("edit_id_client").value = element.id
   
 }
 
@@ -92,7 +96,7 @@ function deleteModal(element) {
   getRow(element)
   
   document.getElementById("deleteModalTitle").innerHTML = `Deseja Deletar <b>${row.firstChild.innerText}</b>?`
-  document.getElementById("deleteModalContent").innerHTML = `Clique em "Deletar" para excluir a empresa <b>${row.firstChild.innerText} | ${row.children[1].innerText}</b>`
+  document.getElementById("deleteModalContent").innerHTML = `Clique em "Deletar" para excluir o cliente <b>${row.firstChild.innerText} | ${row.children[1].innerText}</b>`
 
   document.getElementById("deleteModalButton").dataset.value = element.id
   
@@ -101,8 +105,8 @@ function deleteModal(element) {
 document.getElementById("deleteModalButton").addEventListener("click", async (e) => {
 
   btn = document.getElementById("deleteModalButton")
-  
-  let response = await fetch(`${url}/deletecompany/${await btn.dataset.value}`, {
+  console.log(`${url}/deleteclient/${await btn.dataset.value}`)
+  let response = await fetch(`${url}/deleteclient/${await btn.dataset.value}`, {
                         method: 'POST',
                         body: null
   })
@@ -111,7 +115,7 @@ document.getElementById("deleteModalButton").addEventListener("click", async (e)
       resetTable()
       tableGrid()
       setTimeout(function() {
-      alert('success', `Empresa <b>${row.firstChild.innerText}</b> excluida com sucesso.`)
+      alert('success', `Cliente <b>${row.firstChild.innerText}</b> excluido com sucesso.`)
       }, 300) 
     }
 })

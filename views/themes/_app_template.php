@@ -30,7 +30,7 @@
     <script src="<?= asset("/js/utils/formats.js");?>"></script>
     <script src="<?= asset("/js/utils/form.js"); ?>"></script>   
 
-    <title><?=$title?></title>
+    <title><?=site('name').$title?></title>
 
 
 </head>
@@ -50,7 +50,7 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?=$this->router->route("app.home")?>">
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-robot"></i>
                 </div>
@@ -61,31 +61,11 @@
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Dashboard -->
-            <li class="nav-item">
-                <a class="nav-link" href="index.html">
+            <li class="nav-item <?= activeMenu($title, ["Home"])?>">
+                <a class="nav-link" href="<?=$this->router->route("app.home")?>">
                 <i class="fas fa-home"></i>
                     <span>Home</span></a>
             </li>
-            
-            <hr class="sidebar-divider my-0">
-
-            <li class="nav-item active">
-                <a class="nav-link" href="index.html">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Painel de Controle</span></a>
-            </li>
-            
-            <hr class="sidebar-divider my-0">
-
-            <li class="nav-item">
-                <a class="nav-link" href="index.html">
-                    <i class="fas fa-chart-line"></i>
-                    <span>Gráficos</span></a>
-            </li>
-
-            
-
-            
 
             <!-- Divider -->
             <hr class="sidebar-divider">
@@ -96,17 +76,17 @@
             </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
+            <li class="nav-item <?= activeMenu($title, ["Clientes", "Empresas"])?>">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
                     aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fas fa-fw fa-cog"></i>
                     <span>Empresas / Clientes</span>
                 </a>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div id="collapseTwo" class="collapse <?=showMenu($title, ["Empresas", "Clientes"])?>" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Empresas / Clientes</h6>
-                        <a class="collapse-item" href="<?=$this->router->route("app.companies")?>">Empresas</a>
-                        <a class="collapse-item" href="cards.html">Clientes</a>
+                        <a class="collapse-item <?=activeMenu($title, ["Empresas"])?>" href="<?=$this->router->route("app.companies")?>">Empresas</a>
+                        <a class="collapse-item  <?=activeMenu($title, ["Clientes"])?>" href="<?=$this->router->route("app.clients")?>">Clientes</a>
                     </div>
                 </div>
             </li>
@@ -129,8 +109,7 @@
                 <div id="collapseOne" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Créditos</h6>
-                        <a class="collapse-item" href="login.html">Adicionar Créditos</a>
-                        <a class="collapse-item" href="register.html">Listar Créditos</a>
+                        <a class="collapse-item" href="<?=$this->router->route("app.credits")?>">Créditos</a>
                     </div>
                 </div>
             </li>
@@ -144,8 +123,7 @@
                 <div id="collapseThree" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Ganhos</h6>
-                        <a class="collapse-item" href="login.html">Adicionar Ganhos</a>
-                        <a class="collapse-item" href="register.html">Listar Ganhos</a>
+                        <a class="collapse-item" href="login.html">Ganhos</a>
                     </div>
                 </div>
             </li>
@@ -159,26 +137,9 @@
                 <div id="collapseFour" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Despesas</h6>
-                        <a class="collapse-item" href="login.html">Adicionar Depesas</a>
-                        <a class="collapse-item" href="register.html">Listar Despesas</a>
+                        <a class="collapse-item" href="login.html">Despesas</a>
                     </div>
                 </div>
-            </li>
-
-            <hr class="sidebar-divider">
-
-            <!-- Nav Item - Charts -->
-            <li class="nav-item">
-                <a class="nav-link" href="charts.html">
-                    <i class="fas fa-fw fa-chart-area"></i>
-                    <span>Charts</span></a>
-            </li>
-
-            <!-- Nav Item - Tables -->
-            <li class="nav-item">
-                <a class="nav-link" href="tables.html">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>Tables</span></a>
             </li>
 
             <!-- Divider -->
@@ -209,7 +170,7 @@
                             <input type="search" class="form-control bg-light" list="searchContent" placeholder="Procurar..."
                                 aria-label="Search" aria-describedby="basic-addon2">
                             <div class="input-group-append">
-                                <button class="btn btn-primary" type="button">
+                                <button class="btn btn-primary" type="button" disabled>
                                     <i class="fas fa-arrow-right"></i>
                                 </button>
                             </div>

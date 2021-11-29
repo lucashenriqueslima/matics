@@ -1,6 +1,6 @@
 <!-- Page Heading -->
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3 mr-auto text-gray-800"><i class="fas fa-tachometer-alt"></i> Painel de Controle</h1>
+    <h1 class="h3 mr-auto text-gray-800"><i class="fas fa-home"></i> Home</h1>
     <button id="filter-graph" class="d-sm-inline-block btn btn-sm btn-secondary shadow-sm mr-3"
         data-toggle="modal" data-target="#filterModal"><i class="fas fa-search fa-sm text-white-50"></i> Filtros
     </button>

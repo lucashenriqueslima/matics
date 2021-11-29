@@ -31,7 +31,7 @@ class App extends Controller
           
             
             parent::render("/home", [
-                "title" => site('name')."Home",
+                "title" => "Home",
                 "year" => $year
             ]);
         }
@@ -40,7 +40,21 @@ class App extends Controller
         public function companies()
         {  
             parent::render("/companies", [
-                "title" => site('name')."Empresas",
+                "title" => "Empresas",
+            ]);
+        }
+
+        public function clients()
+        {  
+            parent::render("/clients", [
+                "title" => "Clientes",
+            ]);
+        }
+
+        public function credits()
+        {
+            parent::render("/credits", [
+                "title" => "Créditos",
             ]);
         }
 
@@ -51,6 +65,13 @@ class App extends Controller
             ]);
         }
 
+        public function errorPage($data)
+        {
+            parent::render("/error_page", [
+                "title" => "Erro",
+                "errcode" => $data['errcode']
+            ]);
+        }
 
         public function logoff()
         {

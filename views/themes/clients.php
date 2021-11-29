@@ -1,11 +1,11 @@
 <!-- Page Heading -->
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3 mr-auto text-gray-800"><i class="fas fa-industry"></i></i> Empresas</h1>
+    <h1 class="h3 mr-auto text-gray-800"><i class="fas fa-user-tie"></i> Clientes</h1>
 </div>
 
 <div class="card shadow mb-4">
     <div class="card-header">
-        <h6 class="m-0 font-weight-bold text-primary d-inline">Tabela de Empresas</h6>
+        <h6 class="m-0 font-weight-bold text-primary d-inline">Tabela de Clientes</h6>
         <button class="btn btn-circle btn-outline-success d-inline mr-2 float-right" data-toggle="modal" data-target="#addModal"><i class="fas fa-plus"></i></button> 
     </div>
     <div class="card-body">
@@ -20,25 +20,25 @@
         <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="addeModalTitle">Adicionar Nova Empresa</h5>
+                    <h5 class="modal-title" id="addeModalTitle">Adicionar Novo Cliente</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
                 <div class="modal-body" id="addModalContent">
-                <form action="<?=$this->router->route("api.addCompany")?>" method="post">
+                <form action="<?=$this->router->route("api.addClient")?>" method="post">
                     <div class="input-group py-3">
                         <div class="input-group-prepend">
-                            <span class="input-group-text" id="">Razão Social | Nome Fantasia</span>
+                            <span class="input-group-text" id="">Nome | Celular</span>
                         </div>
-                        <input type="text" id="razao_social" name="razao_social" class="form-control">
-                        <input type="text" id="nome_fantasia" name="nome_fantasia" class="form-control">
+                        <input type="text" id="nome" name="nome" class="form-control">
+                        <input type="text" id="celular" name="celular" class="form-control">
                     </div>
                     <div class="input-group py-3">
                         <div class="input-group-prepend">
-                            <span class="input-group-text" id="">CNPJ</span>
+                            <span class="input-group-text" id="">CPF</span>
                         </div>
-                        <input type="text" id="cnpj" name="cnpj" class="form-control">
+                        <input type="text" id="cpf" name="cpf" class="form-control">
                         
                     </div>
                 
@@ -74,23 +74,23 @@
                     </button>
                 </div>
                 <div class="modal-body" id="editModalContent">
-                <form action="<?=$this->router->route("api.editCompany")?>" method="post">
+                <form action="<?=$this->router->route("api.editClient")?>" method="post">
                     <div class="input-group py-3">
                         <div class="input-group-prepend">
-                            <span class="input-group-text" id="">Razão Social | Nome Fantasia</span>
+                            <span class="input-group-text" id="">Nome | Celular</span>
                         </div>
-                        <input type="text" id="edit_razao_social" name="edit_razao_social" class="form-control">
-                        <input type="text" id="edit_nome_fantasia" name="edit_nome_fantasia" class="form-control">
+                        <input type="text" id="edit_nome" name="edit_nome" class="form-control">
+                        <input type="text" id="edit_celular" name="edit_celular" class="form-control">
                     </div>
                     <div class="input-group py-3">
                         <div class="input-group-prepend">
-                            <span class="input-group-text" id="">CNPJ</span>
+                            <span class="input-group-text" id="">CPF</span>
                         </div>
-                        <input type="text" id="edit_cnpj" name="edit_cnpj" class="form-control">
+                    <input type="text" id="edit_cpf" name="edit_cpf" class="form-control">
                         
                     </div>
 
-                    <input type="text" id="edit_id_company" name="edit_id_company" class="d-none">
+                    <input type="text" id="edit_id_client" name="edit_id_client" class="d-none">
                 
                 </div>
                 <div class="modal-footer">
@@ -144,11 +144,13 @@
 
 <script>
     $(document).ready(function(){
-        $("#cnpj").mask("00.000.000/0000-00")
-        $("#edit_cnpj").mask("00.000.000/0000-00")
+        $("#celular").mask("(00) 00000-0000")
+        $("#edit_celular").mask("(00) 00000-0000")
+        $("#cpf").mask("000.000.000-00")
+        $("#edit_cpf").mask("000.000.000-00")
     })
  
 </script>   
 
 <script src="https://cdn.jsdelivr.net/npm/gridjs/dist/gridjs.umd.js"></script>            
-<script src="<?=asset("/js/scripts/companies.js")?>"></script>            
+<script src="<?=asset("/js/scripts/clients.js")?>"></script>            

@@ -19,6 +19,8 @@ $router->get("/",  "Web:login");
 $router->group("me");
 $router->get("", "App:home", "app.home");
 $router->get("/empresas", "App:companies", "app.companies");
+$router->get("/clientes", "App:clients", "app.clients");
+$router->get("/creditos", "App:Credits", "app.credits");
 $router->get("/painel-de-controle", "App:dashboard", "app.dashboard");
 $router->get("/cadastrar-empresa", "App:registerCompany", "app.registerCompany");
 $router->get("/logoff", "App:logoff", "app.logoff");
@@ -30,12 +32,6 @@ $router->group("auth");
 $router->post("/login", "Auth:login");
 $router->post("/reset", "Auth:msg");
 
-
-
-
-
-
-
 /**
  * Api
  */
@@ -45,16 +41,29 @@ $router->get("/v1/getdategraph", 'Api:getDateGraph');
 $router->get("/v1/getdatagraph/{min_date}/{max_date}", "Api:getDataGraph");
 
 /*companies*/
-$router->post("/v1/addcompany", "Api:addCompany", "api.addCompany");
 $router->get("/v1/getcompanies", "Api:getCompanies");
-$router->delete("/v1/deletecompany/{id_company}", "Api:deleteCompany");
+$router->post("/v1/addcompany", "Api:addCompany", "api.addCompany");
+$router->post("/v1/editcompany", "Api:editCompany", "api.editCompany");
+$router->post("/v1/deletecompany/{id_company}", "Api:deleteCompany");
+
+/*clients*/
+$router->get("/v1/getclients", "Api:getClients");
+$router->post("/v1/addclient", "Api:addClient", "api.addClient");
+$router->post("/v1/editclient", "Api:editClient", "api.editClient");
+$router->post("/v1/deleteclient/{id_client}", "Api:deleteClient");
+
+/*credits*/
+$router->get("/v1/getcredits", "Api:getCredits");
 
 $router->group("ooops");
-$router->get("/{errcode}", function ($data){
-    echo "<h2>Erro ao Carregar a página</h2>";
-});
+$router->get("/{errcode}", "App:errorPage");
 
 $router->dispatch();
+
+if($router->error()){
+    $router->redirect("/ooops/{$router->error()}");
+}
+
 
 
 

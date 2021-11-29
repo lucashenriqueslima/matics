@@ -6,7 +6,7 @@ define("SITE",[
 "desc"=>"desc qualquer",
 "domain"=>"",
 "locale"=>"pt_BR",
-"root"=>"http://localhost:888/matics2",
+"root"=>"http://localhost/matics2",
 "route"=>"Source\Controllers\\",
 "folder" => "/".explode("/" ,$_SERVER["REQUEST_URI"])[1]
 
