@@ -35,6 +35,7 @@ $router->post("/reset", "Auth:msg");
 
 
 
+
 /**
  * Api
  */
@@ -44,6 +45,7 @@ $router->get("/v1/getdategraph", 'Api:getDateGraph');
 $router->get("/v1/getdatagraph/{min_date}/{max_date}", "Api:getDataGraph");
 
 /*companies*/
+$router->post("/v1/addcompany", "Api:addCompany", "api.addCompany");
 $router->get("/v1/getcompanies", "Api:getCompanies");
 $router->delete("/v1/deletecompany/{id_company}", "Api:deleteCompany");
 

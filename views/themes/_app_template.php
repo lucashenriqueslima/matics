@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
 
     <meta charset="utf-8">
@@ -26,6 +25,7 @@
     <script src="<?= asset("/js/utils/req.js");?>"></script>
     <script src="<?= asset("/vendor/jquery/jquery.min.js");?>"></script>
     <script src="<?= asset("/js/demo/sweetalert2.js");?>"></script>
+    <script src="<?= asset("/js/demo/jquery.mask.js");?>"></script>
     <script src="<?= asset("/js/utils/popups.js");?>"></script>
     <script src="<?= asset("/js/utils/formats.js");?>"></script>
     <script src="<?= asset("/js/utils/form.js"); ?>"></script>   
@@ -204,8 +204,7 @@
                 <!-- Topbar -->
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
-                <form
-                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                <div class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                         <div class="input-group">
                             <input type="search" class="form-control bg-light" list="searchContent" placeholder="Procurar..."
                                 aria-label="Search" aria-describedby="basic-addon2">
@@ -216,12 +215,7 @@
                             </div>
                             
                         </div>
-                    <datalist id="searchContent">
-                        <option value="teste">aaaa</option>
-                        <option value="lucas"></option>
-                        <option value="pedro"></option>
-                        </datalist>
-                </form>
+                </div>
 
                     <!-- Sidebar Toggle (Topbar) -->
                     <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
@@ -242,7 +236,7 @@
                             <!-- Dropdown - Messages -->
                             <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
                                 aria-labelledby="searchDropdown">
-                                <form class="form-inline mr-auto w-100 navbar-search">
+                                <div class="form-inline mr-auto w-100 navbar-search">
                                     <div class="input-group">
                                         <input type="text" class="form-control bg-light border-0 small"
                                             placeholder="Search for..." aria-label="Search"
@@ -253,7 +247,7 @@
                                             </button>
                                         </div>
                                     </div>
-                                </form>
+                                </div>
                             </div>
                         </li>
 

@@ -4,7 +4,7 @@
     
     let date = new Date();
 
-    const dategraphs = await req('getdategraph')
+    const dategraphs = await req('/getdategraph')
 
     let start_date = document.getElementById('start-date')
     let final_date = document.getElementById('final-date')
@@ -17,7 +17,7 @@
     
     filter_button = document.getElementById('filter-data-graph')
     
-    createGraph(await req(`getdatagraph/${date.getFullYear()}-01-01/${date.getFullYear()}-12-31`));
+    createGraph(await req(`/getdatagraph/${date.getFullYear()}-01-01/${date.getFullYear()}-12-31`));
 
 
 
@@ -29,7 +29,7 @@
         return
       }
       alterFieldsDate(start_date.value, final_date.value)
-      createGraph(await req(`getdatagraph/${ await document.getElementById('start-date').value}-01/${document.getElementById('final-date').value}-31`));
+      createGraph(await req(`/getdatagraph/${ await document.getElementById('start-date').value}-01/${document.getElementById('final-date').value}-31`));
       $('#filterModal').modal('hide');
     })
 

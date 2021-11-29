@@ -12,12 +12,20 @@ class Companies extends Model
         return $stmt->fetchAll();
     }
 
+    public function addCompany($id_user, $razao_social, $nome_fantasia, $cnpj)
+    {
+        $stmt = $this->pdo->prepare("INSERT INTO `companies` (`id_company`, `id_user`, `razao_social`, `nome_fantasia`, `cnpj`) VALUES (NULL, ?, ?, ?, ?)");
+        $stmt->execute(array($id_user, $razao_social, $nome_fantasia, $cnpj));
+
+        return $stmt->rowCount();
+    }
+
     public function deleteCompany($id_user, $id_company)
     {
         $stmt = $this->pdo->prepare("DELETE FROM companies WHERE id_user = ? AND id_company = ?");
         $stmt->execute(array($id_user, $id_company));
         
-        return($stmt);
+        return $stmt->rowCount() ;
     }
     
 }

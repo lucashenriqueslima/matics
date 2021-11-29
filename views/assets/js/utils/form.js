@@ -25,6 +25,15 @@ $(window).on("load", function(){
                     return;
                 }
 
+                if(su.modal_close){
+                    tableGrid()
+                    $(`#${su.modal_close.modal}`).modal('hide')    
+                    setTimeout(function() {  
+                    alert(su.modal_close.type, su.modal_close.message)
+                    }, 180)
+                    return;
+                }
+
                 if (su.redirect) {
                     window.location.href = su.redirect.url;
                 }

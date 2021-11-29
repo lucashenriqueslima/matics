@@ -46,7 +46,8 @@ class Auth extends Controller
                 
                 return;
              
-            } 
+            }
+    
 
             
 

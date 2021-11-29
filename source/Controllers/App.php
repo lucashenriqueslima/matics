@@ -20,6 +20,7 @@ class App extends Controller
             
             $this->router = $router;
             $this->template = views("/_app_template");  
+            
         }
 
         public function home($data)

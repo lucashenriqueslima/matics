@@ -1,6 +1,7 @@
 tableGrid()
 
 function tableGrid() {
+  resetTable()
     const grid = new gridjs.Grid({
      
       language: {
@@ -57,14 +58,16 @@ function tableGrid() {
   
             ],
   server: {
-    url: 'http://localhost/matics2/api/v1/getcompanies',
-    then: data => data.map(companies => [companies.razao_social, companies.nome_fantasia, companies.cnpj, gridjs.html(`
-  <button class="btn btn-sm btn-circle btn-outline-dark" id="${companies.id_company}"><i class="fas fa-info"></i></button><button class="btn btn-sm btn-circle btn-outline-dark mx-3" id="${companies.id_company}"><i class="far fa-edit"></i></button> <button class="btn btn-sm btn-circle btn-outline-dark" id="${companies.id_company}" onclick="deleteModal(this)" data-toggle="modal" data-target="#deleteModal"><i class="far fa-trash-alt"></i></button>
+    url: `${url}/getcompanies`,
+   then: data => data.map(companies => [companies.razao_social, companies.nome_fantasia, companies.cnpj, gridjs.html(`
+  <button class="btn btn-sm btn-circle btn-outline-dark d-inline" id="${companies.id_company}"><i class="fas fa-info"></i></button><button class="btn btn-sm btn-circle btn-outline-dark mx-3 d-inline" id="${companies.id_company}"><i class="far fa-edit"></i></button> <button class="btn btn-sm btn-circle btn-outline-dark d-inline" id="${companies.id_company}" onclick="deleteModal(this)" data-toggle="modal" data-target="#deleteModal"><i class="far fa-trash-alt"></i></button>
 `)]) 
   } 
 }).render(document.getElementById("grid-table"));
 
 }
+
+
 
 function getRow(element) {
   row = (element.parentNode.parentNode.parentNode)
@@ -95,17 +98,26 @@ document.getElementById("deleteModalButton").addEventListener("click", async (e)
 
   btn = document.getElementById("deleteModalButton")
   
-  let response = await fetch(`http://localhost/matics2/api/v1/deletecompany/${await btn.dataset.value}`, {
+  let response = await fetch(`${url}/deletecompany/${await btn.dataset.value}`, {
                         method: 'DELETE',
                         body: null
   })
 
     if(await response.json){
-      document.getElementById("grid-table").parentNode.removeChild(document.getElementById("grid-table"))
-      document.getElementById("reset").innerHTML = '<div id="grid-table"></div>'
+      resetTable()
       tableGrid()
       setTimeout(function() {
       alert('success', `Empresa ${row.firstChild.innerText} excluida com sucesso.`)
       }, 440) 
     }
 })
+
+function resetTable() {
+
+  document.getElementById("grid-table").parentNode.removeChild(document.getElementById("grid-table"))
+  document.getElementById("reset").innerHTML = '<div id="grid-table"></div>'
+
+  document.querySelector('form').querySelectorAll('input').forEach((element) => {
+    element.value = null
+})
+}

@@ -45,6 +45,28 @@ use Source\Models\Finance;
             return print_r(json_encode((new Companies)->getCompanies($_SESSION['id_user'])));
         }
 
+        public function addCompany($data)
+        {
+            
+
+            if(!$data['razao_social'] || !$data['nome_fantasia'] || !$data['cnpj']){
+                echo $this->ajaxResponse("message", [
+                    "type" => "error",
+                    "message" => "Preencha todos os campos."
+                ]);
+                return;
+            }
+            
+            (new Companies)->addCompany($_SESSION['id_user'], $data['razao_social'], $data['nome_fantasia'], $data['cnpj']);
+                echo $this->ajaxResponse("modal_close", [
+                    "type" => "success",
+                    "message" => 'Empresa adicionada.',
+                    "modal" => "addModal"
+                ]);
+            return;
+            
+        }
+
         public function deleteCompany($data)
         {
             return print_r(json_encode((new Companies)->deleteCompany($_SESSION['id_user'], $data['id_company'])));
