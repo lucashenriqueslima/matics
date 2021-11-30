@@ -26,6 +26,7 @@
     <script src="<?= asset("/vendor/jquery/jquery.min.js");?>"></script>
     <script src="<?= asset("/js/demo/sweetalert2.js");?>"></script>
     <script src="<?= asset("/js/demo/jquery.mask.js");?>"></script>
+    <script src="<?= asset("/js/demo/jquery.maskMoney.js");?>"></script>
     <script src="<?= asset("/js/utils/popups.js");?>"></script>
     <script src="<?= asset("/js/utils/formats.js");?>"></script>
     <script src="<?= asset("/js/utils/form.js"); ?>"></script>   
@@ -123,7 +124,7 @@
                 <div id="collapseThree" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Ganhos</h6>
-                        <a class="collapse-item" href="login.html">Ganhos</a>
+                        <a class="collapse-item" href="<?=$this->router->route("app.earnings")?>">Ganhos</a>
                     </div>
                 </div>
             </li>
@@ -137,7 +138,7 @@
                 <div id="collapseFour" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Despesas</h6>
-                        <a class="collapse-item" href="login.html">Despesas</a>
+                        <a class="collapse-item" href="<?=$this->router->route("app.expenses")?>">Despesas</a>
                     </div>
                 </div>
             </li>

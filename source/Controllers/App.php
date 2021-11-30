@@ -3,6 +3,7 @@
     namespace Source\Controllers;
     use Source\Models\Finance;
     use Source\Models\User;
+    use Source\Models\Companies;
 
 class App extends Controller
     {
@@ -52,16 +53,25 @@ class App extends Controller
         }
 
         public function credits()
-        {
+        {   
+            $companies = (new Companies)->getCompanies($_SESSION['id_user']);
             parent::render("/credits", [
                 "title" => "Créditos",
+                "companies" => $companies
             ]);
         }
 
-        public function registerCompany()
-        {
-            parent::render("/register_company", [
-                
+        public function earnings()
+        {   
+            parent::render("/earnings", [
+                "title" => "Ganhos"
+            ]);
+        }
+
+        public function expenses()
+        {   
+            parent::render("/expenses", [
+                "title" => "Despesas"
             ]);
         }
 

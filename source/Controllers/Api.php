@@ -5,6 +5,8 @@
     use Source\Models\Clients;
     use Source\Models\Companies;
     use Source\Models\Credits;
+use Source\Models\Earnings;
+use Source\Models\Expenses;
     use Source\Models\Finance;
     use Source\Models\Message;
     use Source\Models\User;
@@ -200,11 +202,100 @@
             return print_r(json_encode((new Clients)->deleteClient($_SESSION['id_user'], $data['id_client'])));
         }
 
-        
-
         public function getCredits()
         {
             return print_r(json_encode((new Credits)->getCredits($_SESSION['id_user'])));
+        }
+
+        public function payedCredit($data)
+        {
+            return print_r(json_encode((new Credits)->payedCredit($_SESSION['id_user'], $data['id_credit'])));
+        }
+
+        public function addCredit($data)
+        {
+            $data['valor'] = str_replace(array("R", "$", " ", "."), '', $data['valor']);
+            $data['valor'] = str_replace(array(","), '.', $data['valor']);
+
+            $data['data'] = implode('-', array_reverse(explode('/', $data['data'])));
+
+            if(!$data['addSelect'] || !$data['descricao'] || !$data['valor'] || !$data['data']){
+                echo $this->ajaxResponse("message", [
+                    "type" => "error",
+                    "message" => "Preencha todos os campos."
+                ]);
+                return;
+            }
+
+            if(strlen($data['data']) != 10){
+                echo $this->ajaxResponse("message", [
+                    "type" => "error",
+                    "message" => "Valor inválido para Data."
+                ]);
+                return;
+            }
+
+            (new Credits)->addCredit($_SESSION['id_user'], $data['addSelect'], $data['descricao'], $data['valor'], $data['data']);
+            echo $this->ajaxResponse("modal_close", [
+                "type" => "success",
+                "message" => "Crédito adicionado com sucesso.",
+                "modal" => "addModal"
+            ]);
+            return;
+
+        }
+
+        public function deleteCredit($data)
+        {
+            return print_r(json_encode((new Credits)->deleteCredit($_SESSION['id_user'], $data['id_credit'])));
+        }
+
+        public function getExpenses()
+        {
+            return print_r(json_encode((new Expenses)->getExpenses($_SESSION['id_user'])));
+        }
+
+        public function addExpense($data)
+        {
+            $data['valor'] = str_replace(array("R", "$", " ", ".", "-"), '', $data['valor']);
+            $data['valor'] = str_replace(array(","), '.', $data['valor']);
+
+            $data['data'] = implode('-', array_reverse(explode('/', $data['data'])));
+
+            if(!$data['descricao'] || !$data['valor'] || !$data['data']){
+                echo $this->ajaxResponse("message", [
+                    "type" => "error",
+                    "message" => "Preencha todos os campos."
+                ]);
+                return;
+            }
+
+            if(strlen($data['data']) != 10){
+                echo $this->ajaxResponse("message", [
+                    "type" => "error",
+                    "message" => "Valor inválido para Data."
+                ]);
+                return;
+            }
+
+            (new Expenses)->addExpense($_SESSION['id_user'], $data['descricao'], $data['valor'], $data['data']);
+            echo $this->ajaxResponse("modal_close", [
+                "type" => "success",
+                "message" => "Despesa adicionado com sucesso.",
+                "modal" => "addModal"
+            ]);
+            return;
+
+        }
+
+        public function deleteExpense($data)
+        {
+            return print_r(json_encode((new Expenses)->deleteExpense($_SESSION['id_user'], $data['id_expense'])));
+        }
+
+        public function getEarnings()
+        {
+            return print_r(json_encode((new Earnings)->getEarnings($_SESSION['id_user'])));
         }
 
     }

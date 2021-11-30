@@ -17,6 +17,13 @@
             return false;
         }
 
+        public function register($name, $email, $cpf, $passwd)
+        {
+            $stmt = $this->pdo->prepare("INSERT INTO sub_users VALUES (NULL, 1, ?, ?, ?, ?, '111111111111')");
+            $stmt->execute(array($name, $email, $cpf, $passwd));
+            return true;
+        }
+
         function auth_user(int $id_user, int $id_sub_user)
         {
             $query = $this->pdo->prepare("SELECT count(*) FROM sub_users WHERE id_user = ? AND id_sub_user = ?");

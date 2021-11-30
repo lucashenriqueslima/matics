@@ -3,13 +3,11 @@
 
 define("SITE",[
 "name"=>"Matics² | ",
-"desc"=>"desc qualquer",
+"desc"=>"",
 "domain"=>"",
 "locale"=>"pt_BR",
-"root"=>"http://localhost:888/matics2",
-"route"=>"Source\Controllers\\",
-"folder" => "/".explode("/" ,$_SERVER["REQUEST_URI"])[1]
-
+"root"=>"http://localhost/matics2",
+"route"=>"Source\Controllers",
 ]);
 
 define("VIEWSPATH", dirname(__DIR__, 1)."/views/themes",); 
@@ -19,5 +17,5 @@ define("DATABASE", [
     "port" => "3306",
     "name" => "matics2",
     "username" => "root",
-    "passwd" => "Banana123432",
+    "passwd" => "",
 ]);

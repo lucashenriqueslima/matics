@@ -1,11 +1,11 @@
 <!-- Page Heading -->
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3 mr-auto text-gray-800"><i class="fas fa-file-invoice-dollar"></i> Créditos</h1>
+    <h1 class="h3 mr-auto text-gray-800"><i class="fas fa-receipt"></i> Despesas</h1>
 </div>
 
 <div class="card shadow mb-4">
     <div class="card-header">
-        <h6 class="m-0 font-weight-bold text-primary d-inline">Tabela de Créditos</h6>
+        <h6 class="m-0 font-weight-bold text-primary d-inline">Tabela de Despesas</h6>
         <button class="btn btn-circle btn-outline-success d-inline mr-2 float-right" data-toggle="modal" data-target="#addModal"><i class="fas fa-plus"></i></button> 
     </div>
     <div class="card-body">
@@ -20,47 +20,32 @@
         <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="addeModalTitle">Adicionar Novo Crédito?</h5>
+                    <h5 class="modal-title" id="addeModalTitle">Adicionar Nova Despesa</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
                 <div class="modal-body" id="addModalContent">
-                <form action="<?=$this->router->route("api.addCredit")?>" method="post">
-                    <div class="input-group py-4">
-                        <label class="input-group-text" for="inputGroupSelect01">Options</label>
-                        <select class="form-control" id="addSelect" name="addSelect" require>
-                            <option value="0" selected>Escolher...</option>
-                            <?php 
-                            foreach($companies as $item){
-                                echo '<option value="'.$item['id_company'].'"><b>'.$item['razao_social'].'   |   '.$item['nome_fantasia'].'   |   '.$item['cnpj'].'</b></option>';                                    
-                            }
-                                ?>
-                        </select>
-                    </div>
-
+                <form action="<?=$this->router->route("api.addExpense")?>" method="post">
                     <div class="input-group py-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="">Descrição</span>
                         </div>
-                        <input type="text" id="descricao" name="descricao" class="form-control" disabled>       
+                        <input type="text" id="descricao" name="descricao" class="form-control">       
                     </div>
 
                     <div class="input-group py-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="">Valor</span>
                         </div>
-                        <input type="text" id="valor" name="valor" class="form-control" disabled>       
+                        <input type="text" id="valor" name="valor" class="form-control">       
                     </div>
                     <div class="input-group py-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="">Data</span>
                         </div>
-                        <input type="text" id="data" name="data" class="form-control" disabled>       
+                        <input type="text" id="data" name="data" class="form-control">       
                     </div>
-
-
-                    
                 
                 </div>
                 <div class="modal-footer">
@@ -70,7 +55,7 @@
                         </span>
                         <span class="text">Cancelar</span>
                     </button>
-                    <button class="btn btn-success btn-icon-split" id="addModalButton" type="submit" disabled>
+                    <button class="btn btn-success btn-icon-split" id="addModalButton" type="submit">
                         <span class="icon text-white-50">
                             <i class="fas fa-plus"></i>
                         </span>
@@ -144,11 +129,11 @@
 <script>
     $(document).ready(function(){
         $("#cnpj").mask("00.000.000/0000-00")
-        $("#valor").maskMoney({prefix:'R$ ', thousands:'.', decimal:',', affixesStay: true});
+        $("#valor").maskMoney({prefix:'R$ -', thousands:'.', decimal:',', affixesStay: true});
         $('#data').mask("00/00/0000", {clearIfNotMatch: true});
     })
  
 </script>   
 
 <script src="https://cdn.jsdelivr.net/npm/gridjs/dist/gridjs.umd.js"></script>            
-<script src="<?=asset("/js/scripts/credits.js")?>"></script>            
+<script src="<?=asset("/js/scripts/expenses.js")?>"></script>            

@@ -62,17 +62,8 @@ CREATE TABLE IF NOT EXISTS `clients` (
   KEY `id_user` (`id_user`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4;
 
--- Copiando dados para a tabela matics2.clients: ~8 rows (aproximadamente)
+-- Copiando dados para a tabela matics2.clients: ~0 rows (aproximadamente)
 /*!40000 ALTER TABLE `clients` DISABLE KEYS */;
-INSERT INTO `clients` (`id_client`, `id_user`, `name`, `cellphone`, `cpf`, `status`) VALUES
-	(1, 1, 'Lucas Henrique', '123123123', '123123123', 0),
-	(2, 1, 'a', 'a', 'teste', 0),
-	(3, 1, 'Lucas Henrique Souza', '(62) 99439-0988', '004.234.301-14', 0),
-	(4, 1, 'lucas', '85 99439-0988', '12344555', 0),
-	(5, 1, 'Lucas', '(85) 99991-2931', '123.123.123-11', 0),
-	(6, 1, 'Matheus', '(84) 23423-4234', '123.654.561-23', 0),
-	(7, 1, 'Lucas Henrique Souza de Lima', '(62) 99439-9999', '004.234.301-11', 0),
-	(8, 1, 'Lucas Henrique', '(62) 99439-0988', '004.234.301-11', 1);
 /*!40000 ALTER TABLE `clients` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela matics2.companies
@@ -85,52 +76,61 @@ CREATE TABLE IF NOT EXISTS `companies` (
   `status` int(11) NOT NULL DEFAULT 1,
   PRIMARY KEY (`id_company`),
   KEY `id_user` (`id_user`)
-) ENGINE=InnoDB AUTO_INCREMENT=220 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=223 DEFAULT CHARSET=utf8mb4;
 
--- Copiando dados para a tabela matics2.companies: ~8 rows (aproximadamente)
+-- Copiando dados para a tabela matics2.companies: ~0 rows (aproximadamente)
 /*!40000 ALTER TABLE `companies` DISABLE KEYS */;
-INSERT INTO `companies` (`id_company`, `id_user`, `razao_social`, `nome_fantasia`, `cnpj`, `status`) VALUES
-	(211, 1, 'Lucas', 'Teste', '31.312.312/3123-12', 0),
-	(212, 1, 'Cristima', 'Lembrar', '12.312.423/1423-54', 1),
-	(213, 1, 'Lucas', '312312', '21.312.312/3123-13', 0),
-	(214, 1, 'asdasd', '312312', '12.312.312/3123-12', 0),
-	(215, 1, 'Lucas', '312312', '12.312.312/3123-12', 0),
-	(216, 1, 'Lucas', 'Teste', '12.312.312/3123-21', 0),
-	(217, 1, 'Lucas', 'Teste', '12.312.312/3123-21', 0),
-	(218, 1, 'Lucas', 'Teste', '12.312.312/3123-12', 0),
-	(219, 1, 'Lucas', 'Teste', '12.312.312/3123-21', 1);
 /*!40000 ALTER TABLE `companies` ENABLE KEYS */;
 
--- Copiando estrutura para tabela matics2.credits_earnings
-CREATE TABLE IF NOT EXISTS `credits_earnings` (
-  `id_credit_earning` int(11) NOT NULL AUTO_INCREMENT,
+-- Copiando estrutura para tabela matics2.credits
+CREATE TABLE IF NOT EXISTS `credits` (
+  `id_credit` int(11) NOT NULL AUTO_INCREMENT,
   `id_user` int(11) NOT NULL DEFAULT 0,
   `id_company` int(11) NOT NULL DEFAULT 0,
+  `description` varchar(255) NOT NULL DEFAULT '0',
   `value` decimal(12,2) NOT NULL DEFAULT 0.00,
   `date` date NOT NULL,
-  `status` int(11) NOT NULL DEFAULT 0,
-  PRIMARY KEY (`id_credit_earning`),
+  PRIMARY KEY (`id_credit`) USING BTREE,
   KEY `id_user` (`id_user`),
   KEY `id_company` (`id_company`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4;
 
--- Copiando dados para a tabela matics2.credits_earnings: ~0 rows (aproximadamente)
-/*!40000 ALTER TABLE `credits_earnings` DISABLE KEYS */;
-INSERT INTO `credits_earnings` (`id_credit_earning`, `id_user`, `id_company`, `value`, `date`, `status`) VALUES
-	(1, 1, 212, 100.20, '2000-12-30', 1);
-/*!40000 ALTER TABLE `credits_earnings` ENABLE KEYS */;
+-- Copiando dados para a tabela matics2.credits: ~0 rows (aproximadamente)
+/*!40000 ALTER TABLE `credits` DISABLE KEYS */;
+/*!40000 ALTER TABLE `credits` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela matics2.earnings
 CREATE TABLE IF NOT EXISTS `earnings` (
   `id_earning` int(11) NOT NULL AUTO_INCREMENT,
-  `id_user` int(11) NOT NULL,
-  `value` decimal(10,2) NOT NULL,
-  PRIMARY KEY (`id_earning`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
+  `id_user` int(11) NOT NULL DEFAULT 0,
+  `id_company` int(11) NOT NULL DEFAULT 0,
+  `description` varchar(255) NOT NULL DEFAULT '0',
+  `value` decimal(15,2) NOT NULL DEFAULT 0.00,
+  `date` date DEFAULT NULL,
+  `date_payed` date DEFAULT NULL,
+  PRIMARY KEY (`id_earning`),
+  KEY `id_user` (`id_user`),
+  KEY `id_company` (`id_company`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4;
 
 -- Copiando dados para a tabela matics2.earnings: ~0 rows (aproximadamente)
 /*!40000 ALTER TABLE `earnings` DISABLE KEYS */;
 /*!40000 ALTER TABLE `earnings` ENABLE KEYS */;
+
+-- Copiando estrutura para tabela matics2.expenses
+CREATE TABLE IF NOT EXISTS `expenses` (
+  `id_expense` int(11) NOT NULL AUTO_INCREMENT,
+  `id_user` int(11) NOT NULL DEFAULT 0,
+  `description` varchar(255) NOT NULL DEFAULT '0',
+  `value` decimal(15,2) NOT NULL DEFAULT 0.00,
+  `date` date DEFAULT NULL,
+  PRIMARY KEY (`id_expense`),
+  KEY `id_user` (`id_user`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+
+-- Copiando dados para a tabela matics2.expenses: ~0 rows (aproximadamente)
+/*!40000 ALTER TABLE `expenses` DISABLE KEYS */;
+/*!40000 ALTER TABLE `expenses` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela matics2.finance_month
 CREATE TABLE IF NOT EXISTS `finance_month` (
@@ -141,15 +141,10 @@ CREATE TABLE IF NOT EXISTS `finance_month` (
   `earning` decimal(15,2) DEFAULT 0.00,
   `expense` decimal(15,2) DEFAULT 0.00,
   PRIMARY KEY (`id_finance_month`)
-) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8mb4;
 
--- Copiando dados para a tabela matics2.finance_month: ~4 rows (aproximadamente)
+-- Copiando dados para a tabela matics2.finance_month: ~0 rows (aproximadamente)
 /*!40000 ALTER TABLE `finance_month` DISABLE KEYS */;
-INSERT INTO `finance_month` (`id_finance_month`, `id_user`, `date`, `credit`, `earning`, `expense`) VALUES
-	(25, 1, '2021-11-01', 210.00, 1223.00, 12312.00),
-	(26, 1, '2021-12-01', 300.00, 300.00, 500.00),
-	(27, 1, '2021-10-07', 312.00, 123.00, 3213.00),
-	(29, 1, '2021-09-01', 100.00, 100000.00, 0.00);
 /*!40000 ALTER TABLE `finance_month` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela matics2.sub_users
@@ -167,7 +162,7 @@ CREATE TABLE IF NOT EXISTS `sub_users` (
 -- Copiando dados para a tabela matics2.sub_users: ~0 rows (aproximadamente)
 /*!40000 ALTER TABLE `sub_users` DISABLE KEYS */;
 INSERT INTO `sub_users` (`id_sub_user`, `id_user`, `name`, `email`, `cpf`, `passwd`, `access`) VALUES
-	(1, 1, 'Lucas Henrique Souza', 'lucas@hotmail.com', '123', '123', '111111111111');
+	(1, 1, 'Lucas Henrique Souza', 'lucas@hotmail.com', '00423430114', '123', '111111111111');
 /*!40000 ALTER TABLE `sub_users` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela matics2.users
@@ -183,6 +178,107 @@ CREATE TABLE IF NOT EXISTS `users` (
 INSERT INTO `users` (`id_user`, `cpf`, `msg_counter`) VALUES
 	(1, '00423430114', 0);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
+
+-- Copiando estrutura para procedure matics2.AddProcedure
+DELIMITER //
+CREATE DEFINER=`root`@`localhost` PROCEDURE `AddProcedure`(IN `TriggerType` INT, IN `DateVerify` VARCHAR(10), IN `ValueFinance` DECIMAL(15,2), IN `UserId` INT)
+BEGIN
+	DECLARE error_sql tinyint default false;
+    DECLARE IdVerify int;
+    
+    DECLARE continue handler for sqlexception set error_sql = true;
+	START TRANSACTION;
+    
+    SET IdVerify = (SELECT id_finance_month FROM finance_month WHERE MONTH(date) = MONTH(DateVerify) AND YEAR(date) = YEAR(DateVerify) AND id_user = UserId);
+    IF IdVerify > 0 THEN
+		CASE
+			WHEN TriggerType = 1 THEN UPDATE finance_month SET credit = credit + ValueFinance WHERE id_finance_month = IdVerify; INSERT INTO credits VALUES(NULL, UserId, ValueFinance);
+			WHEN TriggerType = 2 THEN UPDATE finance_month SET earning = earning + ValueFinance WHERE id_finance_month = IdVerify; INSERT INTO earnings VALUES(NULL, UserId, ValueFinance);
+			WHEN TriggerType = 3 THEN UPDATE finance_month SET expense = expense + ValueFinance WHERE id_finance_month = IdVerify; INSERT INTO expense VALUES(NULL, UserId, ValueFinance);
+		END CASE;
+	ELSE
+		CASE
+			WHEN TriggerType = 1 THEN INSERT INTO finance_month VALUES(NULL, UserId, DateVerify, ValueFinance, 0.00, 0.00); INSERT INTO credits VALUES(NULL, UserId, ValueFinance);
+            		WHEN TriggerType = 2 THEN INSERT INTO finance_month VALUES(NULL, UserId, DateVerify, 0.00, ValueFinance, 0.00); INSERT INTO earnings VALUES(NULL, UserId, ValueFinance);
+			WHEN TriggerType = 3 THEN INSERT INTO finance_month VALUES(NULL, UserId, DateVerify, 0.00, 0.00, ValueFinance);	INSERT INTO expense VALUES(NULL, UserId, ValueFinance);
+		END CASE;
+    END IF;
+
+	IF error_sql = false
+		THEN COMMIT;
+	ELSE 
+		ROLLBACK; 
+	END IF;
+END//
+DELIMITER ;
+
+-- Copiando estrutura para procedure matics2.DeleteProcedure
+DELIMITER //
+CREATE DEFINER=`root`@`localhost` PROCEDURE `DeleteProcedure`(
+	IN `TriggerType` INT,
+	IN `DateVerify` VARCHAR(10),
+	IN `ValueFinance` DECIMAL(15,2),
+	IN `FinanceId` INT,
+	IN `UserId` INT
+)
+BEGIN
+	DECLARE error_sql tinyint default false;
+    
+	DECLARE continue handler for sqlexception set error_sql = true;
+	START TRANSACTION;
+	CASE
+		WHEN TriggerType = 1 THEN DELETE FROM credits WHERE id_credit = FinanceId AND id_user = UserId; UPDATE finance_month SET credit = credit - ValueFinance WHERE id_user = UserId AND MONTH(date) = MONTH(DateVerify) AND YEAR(date) = YEAR(DateVerify);
+        WHEN TriggerType = 2 THEN DELETE FROM earnings WHERE id_earning = FinanceId AND id_user = UserId; UPDATE finance_month SET earning = earning - ValueFinance WHERE id_user = UserId AND MONTH(date) = MONTH(DateVerify) AND YEAR(date) = YEAR(DateVerify) ;
+        WHEN TriggerType = 3 THEN DELETE FROM expenses WHERE id_expense = FinanceId AND id_user = UserId; UPDATE finance_month SET expense = expense - ValueFinance WHERE id_user = UserId AND MONTH(date) = MONTH(DateVerify) AND YEAR(date) = YEAR(DateVerify);
+    END CASE;
+    
+    IF (SELECT credit + earning + expense FROM finance_month WHERE MONTH(date) = MONTH(DateVerify) AND YEAR(date) = YEAR(DateVerify) AND id_user = UserId) = 0
+		THEN DELETE FROM finance_month WHERE MONTH(date) = MONTH(DateVerify) AND YEAR(date) = YEAR(DateVerify) AND id_user = UserId;
+	END IF;
+    
+    	IF error_sql = false
+		THEN COMMIT;
+	ELSE 
+		ROLLBACK; 
+	END IF;
+END//
+DELIMITER ;
+
+-- Copiando estrutura para procedure matics2.MainProcedure
+DELIMITER //
+CREATE DEFINER=`root`@`localhost` PROCEDURE `MainProcedure`(
+	IN `TriggerType` INT,
+	IN `DateVerify` VARCHAR(10),
+	IN `ValueFinance` DECIMAL(15,2),
+	IN `UserId` INT
+)
+BEGIN
+   DECLARE IdVerify int;
+   DECLARE error_sql tinyint default false;
+   
+   DECLARE continue handler for sqlexception set error_sql = true;
+	START TRANSACTION;
+    SET IdVerify = (SELECT id_finance_month FROM finance_month WHERE MONTH(date) = MONTH(DateVerify) AND YEAR(date) = YEAR(DateVerify) AND id_user = UserId);
+    IF IdVerify > 0 THEN
+		CASE
+			WHEN TriggerType = 1 THEN UPDATE finance_month SET credit = credit + ValueFinance WHERE id_finance_month = IdVerify;
+			WHEN TriggerType = 2 THEN UPDATE finance_month SET earning = earning + ValueFinance, credit = credit - ValueFinance WHERE id_finance_month = IdVerify; 
+			WHEN TriggerType = 3 THEN UPDATE finance_month SET expense = expense + ValueFinance WHERE id_finance_month = IdVerify; 
+		END CASE;
+	ELSE
+		CASE
+			WHEN TriggerType = 1 THEN INSERT INTO finance_month VALUES(NULL, UserId, DateVerify, ValueFinance, 0.00, 0.00);
+			WHEN TriggerType = 3 THEN INSERT INTO finance_month VALUES(NULL, UserId, DateVerify, 0.00, 0.00, ValueFinance);
+		END CASE;
+    END IF;
+    
+    IF error_sql = false
+		THEN COMMIT;
+	ELSE 
+		ROLLBACK; 
+	END IF;
+END//
+DELIMITER ;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IFNULL(@OLD_FOREIGN_KEY_CHECKS, 1) */;

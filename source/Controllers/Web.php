@@ -24,4 +24,11 @@
 
     }
 
+    public function register()
+    {
+        parent::render("/register", [
+            "title" => site('name')."Cadastre-se"
+        ]);
+    }
+
 }

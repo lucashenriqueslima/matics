@@ -43,13 +43,13 @@ function tableGrid() {
     },
   columns: [
                 {
-                    name: 'Razão Social'
-                },
-                {
                     name: 'Nome Fantasia'
                 },
                 {
                     name: 'CNPJ'
+                },
+                {
+                    name: 'Descrição'
                 },
                 {
                     name: "Valor"
@@ -65,8 +65,8 @@ function tableGrid() {
             ],
   server: {
     url: `${url}/getcredits`,
-   then: data => data.map(credits => [credits.razao_social, credits.nome_fantasia, credits.cnpj, number_format(credits.value), credits.date, gridjs.html(`
- <button class="btn btn-sm btn-circle btn-outline-dark mr-1 d-inline" onclick="payedModal(this)" data-toggle="modal" data-target="#payedModal" id="${credits.id_credit_earning}"><i class="fas fa-hand-holding-usd"></i></button> <button class="btn btn-sm btn-circle btn-outline-dark ml-1 d-inline" id="${credits.id_earning_credit}" onclick="deleteModal(this)" data-toggle="modal" data-target="#deleteModal"><i class="far fa-trash-alt"></i></button>
+   then: data => data.map(credits => [credits.nome_fantasia, credits.cnpj, credits.description, number_format(credits.value), credits.date, gridjs.html(`
+ <button class="btn btn-sm btn-circle btn-outline-dark mr-1 d-inline" onclick="payedModal(this)" data-toggle="modal" data-target="#payedModal" id="${credits.id_credit}"><i class="fas fa-hand-holding-usd"></i></button> <button class="btn btn-sm btn-circle btn-outline-dark ml-1 d-inline" id="${credits.id_credit}" onclick="deleteModal(this)" data-toggle="modal" data-target="#deleteModal"><i class="far fa-trash-alt"></i></button>
 `)]) 
   } 
 }).render(document.getElementById("grid-table"));
@@ -83,7 +83,7 @@ function getRow(element) {
 function payedModal(element) {
   getRow(element)
   
-  document.getElementById("payedModalTitle").innerHTML = `Abater o crédito <b>${row.children[3].innerText} | ${row.children[4].innerText}</b>`
+  document.getElementById("payedModalTitle").innerHTML = `Abater o crédito <b>${row.children[2].innerText} | ${row.children[3].innerText} | ${row.children[4].innerText}</b>`
   document.getElementById("payedModalContent").innerHTML = `Clique em "Abater" para quitar o crédito referente a empresa <b>${row.children[0].innerText} | ${row.children[1].innerText} | ${row.children[2].innerText} </b>`
   
   document.getElementById("payedModalButton").dataset.value = element.id
@@ -93,8 +93,8 @@ function payedModal(element) {
 function deleteModal(element) {
   getRow(element)
   
-  document.getElementById("deleteModalTitle").innerHTML = `Deseja Deletar <b>${row.firstChild.innerText}</b>?`
-  document.getElementById("deleteModalContent").innerHTML = `Clique em "Deletar" para excluir a empresa <b>${row.firstChild.innerText} | ${row.children[1].innerText}</b>`
+  document.getElementById("deleteModalTitle").innerHTML = `Deseja Deletar <b>${row.children[2].innerText} | ${row.children[3].innerText}</b> ?`
+  document.getElementById("deleteModalContent").innerHTML = `Clique em "Deletar" para excluir o crédito <b>${row.firstChild.innerText} | ${row.children[2].innerText}</b>`
 
   document.getElementById("deleteModalButton").dataset.value = element.id
   
@@ -104,6 +104,7 @@ document.getElementById("payedModalButton").addEventListener("click", async (e) 
   
   btn = document.getElementById("payedModalButton")
   
+  console.log(`${url}/payedcredit/${await btn.dataset.value}`)
   let response = await fetch(`${url}/payedcredit/${await btn.dataset.value}`, {
                         method: 'POST',
                         body: null
@@ -123,7 +124,7 @@ document.getElementById("deleteModalButton").addEventListener("click", async (e)
 
   btn = document.getElementById("deleteModalButton")
   
-  let response = await fetch(`${url}/deletecompany/${await btn.dataset.value}`, {
+  let response = await fetch(`${url}/deletecredit/${await btn.dataset.value}`, {
                         method: 'POST',
                         body: null
   })
@@ -132,7 +133,7 @@ document.getElementById("deleteModalButton").addEventListener("click", async (e)
       resetTable()
       tableGrid()
       setTimeout(function() {
-      alert('success', `Empresa <b>${row.firstChild.innerText}</b> excluida com sucesso.`)
+      alert('success', `Crédito excluido com sucesso.`)
       }, 300) 
     }
 })
@@ -146,3 +147,19 @@ function resetTable() {
     element.value = null
 })
 }
+
+document.getElementById("addSelect").addEventListener("change", (e) => {
+
+  if(document.getElementById("addSelect").value != 0){
+    document.querySelector('form').querySelectorAll('input').forEach( (element) => {  
+      element.disabled = false
+    })
+      document.getElementById("addModalButton").disabled = false
+    
+  }else{
+    document.querySelector('form').querySelectorAll('input').forEach( (element) => {  
+      element.disabled = true  
+  })
+    document.getElementById("addModalButton").disabled = true
+  }
+})
