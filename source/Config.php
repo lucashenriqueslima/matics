@@ -6,7 +6,7 @@ define("SITE",[
 "desc"=>"desc qualquer",
 "domain"=>"",
 "locale"=>"pt_BR",
-"root"=>"http://localhost/matics2",
+"root"=>"http://localhost:888/matics2",
 "route"=>"Source\Controllers\\",
 "folder" => "/".explode("/" ,$_SERVER["REQUEST_URI"])[1]
 
@@ -19,5 +19,5 @@ define("DATABASE", [
     "port" => "3306",
     "name" => "matics2",
     "username" => "root",
-    "passwd" => "",
+    "passwd" => "Banana123432",
 ]);

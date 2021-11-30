@@ -83,11 +83,10 @@ function getRow(element) {
 function payedModal(element) {
   getRow(element)
   
-  document.getElementById("payedModalTitle").innerHTML = `Abater crédito <b>${row.children[1].innerText} | ${number_format(row.children[3].innerText)} | ${row.children[4].innerText}</b>`
-  document.getElementById("payed_razao_social").value = row.firstChild.innerText
-  document.getElementById("payed_nome_fantasia").value = row.children[1].innerText
-  document.getElementById("payed_cnpj").value = row.children[2].innerText
-  document.getElementById("payed_id_company").value = element.id
+  document.getElementById("payedModalTitle").innerHTML = `Abater o crédito <b>${row.children[3].innerText} | ${row.children[4].innerText}</b>`
+  document.getElementById("payedModalContent").innerHTML = `Clique em "Abater" para quitar o crédito referente a empresa <b>${row.children[0].innerText} | ${row.children[1].innerText} | ${row.children[2].innerText} </b>`
+  
+  document.getElementById("payedModalButton").dataset.value = element.id
   
 }
 
@@ -100,6 +99,25 @@ function deleteModal(element) {
   document.getElementById("deleteModalButton").dataset.value = element.id
   
 }
+
+document.getElementById("payedModalButton").addEventListener("click", async (e) => {
+  
+  btn = document.getElementById("payedModalButton")
+  
+  let response = await fetch(`${url}/payedcredit/${await btn.dataset.value}`, {
+                        method: 'POST',
+                        body: null
+  })
+
+    if(await response.json){
+      resetTable()
+      tableGrid()
+      setTimeout(function() {
+      alert('success', `Crédito no valor de <b>${row.children[3].innerText}</b> abatido com sucesso.`)
+      }, 300) 
+    }
+})
+
 
 document.getElementById("deleteModalButton").addEventListener("click", async (e) => {
 

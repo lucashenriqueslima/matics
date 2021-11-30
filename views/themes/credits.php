@@ -80,9 +80,9 @@
                     </span>
                     <span class="text">Cancelar</span>
                 </button>
-                <button href="#" class="btn btn-danger btn-icon-split" id="payedModalButton" type="button" data-dismiss="modal">
+                <button class="btn btn-success btn-icon-split" id="payedModalButton" type="button">
                     <span class="icon text-white-50">
-                        <i class="far fa-trash-alt"></i>
+                    <i class="fas fa-hand-holding-usd"></i>
                     </span>
                     <span class="text">Abater</span>
                 </button>

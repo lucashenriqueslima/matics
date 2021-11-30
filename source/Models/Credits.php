@@ -9,7 +9,8 @@ class Credits extends Model
         $stmt = $this->pdo->prepare("SELECT 
         c.razao_social, 
         c.nome_fantasia, 
-        c.cnpj, 
+        c.cnpj,
+        ce.id_credit_earning, 
         ce.value, 
         DATE_FORMAT(ce.date, '%d/%m/%Y') AS date
         FROM credits_earnings ce 
